@@ -1,39 +1,41 @@
 import subprocess
 import os
-import json
-from datetime import datetime
+import sys
 
-# SKARNER PROACTIVE MONITOR v1.0
-# Este script consolida a saúde do GitHub e Projetos Locais
+# Força UTF-8 no output do Python
+if sys.platform == "win32":
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 PROJECTS_DIR = r"C:\Users\Horyu\Desktop\Projetos"
-DISCORD_CHANNEL_ID = "1381683291752501288"
 
 def run_command(cmd, cwd=None):
     try:
-        result = subprocess.run(cmd, cwd=cwd, shell=True, capture_output=True, text=True, timeout=300)
+        # Usa errors='replace' para lidar com caracteres estranhos do PowerShell no Windows
+        result = subprocess.run(cmd, cwd=cwd, shell=True, capture_output=True, text=True, timeout=300, encoding='cp1252', errors='replace')
         return result.stdout if result.returncode == 0 else result.stderr
     except Exception as e:
         return str(e)
 
 def get_github_pulse():
-    print("[*] Coletando pulso do GitHub...")
     return run_command(f"powershell.exe -File {os.path.join(PROJECTS_DIR, 'check_github.ps1')}")
 
 def get_local_health():
-    print("[*] Validando builds locais...")
     return run_command(f"python {os.path.join(PROJECTS_DIR, 'skarner_monitor.py')}")
 
 def generate_report():
     github = get_github_pulse()
     local = get_local_health()
     
+    # Remove caracteres nulos ou placeholders de erro de encoding
+    github = github.replace('\ufffd', '').strip()
+    
     report = f"🌌 **Relatório Diário de Saúde Técnica - Skarner**\n\n"
-    report += f"**[GitHub Pulse]**\n{github}\n"
-    report += f"**[Local Builds]**\n{local if local else '✅ Todos os projetos estáveis.'}\n\n"
+    report += f"**[GitHub Pulse]**\n{github}\n\n"
+    report += f"**[Local Builds]**\n{local if local.strip() else '✅ Todos os projetos estáveis.'}\n\n"
     report += f"**[Sugestão do Tech Lead]**\n"
     
-    if "Nenhuma atividade" in github:
+    if "Nenhuma atividade" in github or not github:
         report += "⚠️ Detectei inatividade. Sugiro uma revisão rápida no código do Ferdinan para manter o ritmo.\n"
     else:
         report += "🚀 Progresso detectado! Ótimo trabalho. Quer que eu revise os últimos commits?\n"
@@ -41,6 +43,4 @@ def generate_report():
     return report
 
 if __name__ == "__main__":
-    report_text = generate_report()
-    print(report_text)
-    # No futuro, o Skarner chamará a ferramenta 'message' com este texto.
+    print(generate_report())
