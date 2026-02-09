@@ -1,0 +1,8 @@
+*.exe
+*.zip
+node_modules/
+temp_ferdinan/
+build/
+dist/
+.env
+*.log
