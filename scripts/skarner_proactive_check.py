@@ -23,9 +23,23 @@ def get_github_pulse():
 def get_local_health():
     return run_command(f"python {os.path.join(PROJECTS_DIR, 'skarner_monitor.py')}")
 
+def run_secure_calc(expression):
+    # Usa o novo executor Monty para validar expressões ou lógicas de forma segura
+    executor_path = os.path.join(PROJECTS_DIR, "scripts", "secure_executor.py")
+    result_json = run_command(f"python {executor_path} \"{expression}\"")
+    try:
+        import json
+        return json.loads(result_json)
+    except:
+        return {"status": "error", "message": "Falha ao processar JSON do Monty"}
+
 def generate_report():
     github = get_github_pulse()
     local = get_local_health()
+    
+    # Exemplo de uso do Monty: Calcular pontuação de saúde técnica de forma segura
+    # (Poderia ser uma lógica complexa vinda de uma base de conhecimento)
+    health_calc = run_secure_calc("score = 100; score -= 10 if 'Nenhuma atividade' in '" + github[:50] + "' else 0; score")
     
     # Remove caracteres nulos ou placeholders de erro de encoding
     github = github.replace('\ufffd', '').strip()
@@ -33,6 +47,10 @@ def generate_report():
     report = f"🌌 **Relatório Diário de Saúde Técnica - Skarner**\n\n"
     report += f"**[GitHub Pulse]**\n{github}\n\n"
     report += f"**[Local Builds]**\n{local if local.strip() else '✅ Todos os projetos estáveis.'}\n\n"
+    
+    if health_calc.get("status") == "success":
+        report += f"**[Skarner Health Score]** 💓 {health_calc.get('result')}/100\n\n"
+
     report += f"**[Sugestão do Tech Lead]**\n"
     
     if "Nenhuma atividade" in github or not github:
