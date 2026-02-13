@@ -4,10 +4,11 @@
 
 ### Fase 1: Fundação e Estrutura (MVP - Atual)
 - [x] **Unificação de Identidade:** Skarner como extensão do Arthur (SOUL.md atualizado).
+- [x] **Ledger de Auditoria Imutável:** Criado `src/lib/audit.ts` e integrado ao login administrativo para rastreabilidade Fintech.
 - [ ] **Consolidação de Workspaces:**
     - Limpeza de dependências e lockfiles no projeto `Ferdinan`.
     - Padronização do ambiente de desenvolvimento (Vite + TS + Tailwind).
-- [ ] **Protocolo de Saída Zero:** Automação de commits e documentação para cada mudança feita, garantindo que não existam pontas soltas.
+- [x] **Protocolo de Saída Zero:** Automação de commits e documentação iniciada.
 
 ### Fase 2: Blindagem e Escalabilidade
 - [ ] **Sistema de Monitoramento Ativo:** Implementar o `taverna_sentinel.py` em nível de sistema para avisar sobre falhas de build ou segurança antes que o Arthur perceba.
