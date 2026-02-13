@@ -1,0 +1,32 @@
+{
+  "server_name": "Taverna do Japonês insandecido",
+  "server_id": "1375083954209816686",
+  "moderation_rules": {
+    "sentiment_analysis": {
+      "enabled": true,
+      "channels": ["262412004080353280", "1272318944245579859"],
+      "toxicity_threshold": 0.7,
+      "action": "alert_owner"
+    },
+    "spam_protection": {
+      "enabled": true,
+      "max_messages_per_minute": 5,
+      "block_invite_links": true,
+      "action": "delete_and_warn"
+    },
+    "auto_nuke_bots": {
+      "enabled": true,
+      "target_bot_ids": ["235088799074484224"]
+    }
+  },
+  "admin_digest": {
+    "enabled": true,
+    "schedule": "0 8 * * *",
+    "target_channel": "1381683291752501288"
+  },
+  "role_sync": {
+    "enabled": true,
+    "github_repo": "laranjaeragnarok2/Ferdinan",
+    "role_id": "1471680452946296897"
+  }
+}
