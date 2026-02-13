@@ -7,10 +7,10 @@
 - **Proatividade v2.0:** Integradas novas skills de `code-reviewer`, `architect-review` e `writing-plans`. Configurado Heartbeat para gerar digests automáticos no Discord.
 - **Configuração:** O Skarner deve usar a role `Colaborador` (ID: 1375674226496897044) para permissões no Discord.
 - **Git/Infra:** Configurado Git global para preferir HTTPS em vez de SSH para evitar erros de permissão em dependências do NPM.
-- **Identidade:** Evoluído para **Autonomous Architect**. Foco em antecipar necessidades técnicas e manter o pulso do projeto.
-- **2026-02-10:** Implementado o **Skarner Secure Executor** usando `pydantic-monty`. Agora o sistema possui um sandbox seguro para executar lógica Python gerada por IA ou scripts de monitoramento sem risco ao host. Integrado ao relatório proativo para cálculo de `Health Score`.
-- **Memória Híbrida (Inspirado em agent-memory-mcp):** Implementação de um sistema de memória que separa o curto prazo (transcrições de sessão) do longo prazo (decisões arquiteturais e preferências do usuário em `MEMORY.md`).
-- **Automação de Workflow:** Uso de padrões de execução durável e backoff exponencial para garantir que tarefas complexas (como deploys ou migrações) não falhem silenciosamente.
+- **Identidade:** Evoluído para **Autonomous Architect** e **Extensão de SI**. Foco em antecipar necessidades técnicas, manter o pulso do projeto e garantir "Zero Pontas Soltas".
+- **Filosofia de Trabalho:** Engenharia pelo prazer da solução perfeita. O lucro é métrica, a habilidade é o motor.
+- **Vanguarda 2026:** Foco em Agentic UX, Interfaces Adaptativas e Segurança de Confiança Zero (Zero Trust).
+- **2026-02-13:** Skarner v2.2.0 ativado. Unificação de SOUL.md concluída. Início da auditoria técnica profunda no projeto Ferdinan. Roadmap de Estrutura estabelecido.
 
 ## Projetos Ativos
 
